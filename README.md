@@ -1,6 +1,7 @@
 # Air quality sensor
-
-## Device Sensors
+## Device
+- ESP32 board : https://ebay.to/39Jhv0x
+## Sensors board
 - Sensor board : https://ebay.to/36HKQqx
 
 ### BMP280
