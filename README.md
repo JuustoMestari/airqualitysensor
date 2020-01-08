@@ -54,7 +54,7 @@ rshell -p COM3 rm -r /pyboard/
 ```
 Copy all files to device (doesn't seem to work on windows)
 ```console
-rshell -p COM3 cp -r ./device/* /pyboard
+rshell -p COM3 cp -r device/* /pyboard
 ```
 Copy single file at a time (windows)
 ```console
