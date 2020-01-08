@@ -26,16 +26,42 @@
 - si7021 : https://github.com/chrisbalmer/micropython-si7021
 - urequests : https://github.com/micropython/micropython-lib/tree/master/urequests
 
+## firmware
+- Download latest version of micropython for ESP32 : http://micropython.org/download#esp32
+- Flash using instructions from micropython firmware download website using esptool : https://github.com/espressif/esptool
+```console
+python esptool.py --chip esp32 --port COM3 erase_flash
+```
+```console
+python esptool.py --chip esp32 --port COM3 --baud 460800 write_flash -z 0x1000 esp32-20190125-v1.xxxxx.bin
+```
+
 ## rshell
 Install with 
 ```console
 sudo pip3 install rshell
 ```
+```console
+pip install rshell
+```
+List files on device
+```console
+rshell -p COM3 ls /pyboard
+```
 Clear files on device
 ```console
-rshell -p /dev/ttyUSB0 rm -r /pyboard/
+rshell -p COM3 rm -r /pyboard/
 ```
-Copy files to device
+Copy all files to device (doesn't seem to work on windows)
 ```console
-rshell -p /dev/ttyUSB0 cp -r device/* /pyboard
+rshell -p COM3 cp -r ./device/* /pyboard
 ```
+Copy single file at a time (windows)
+```console
+rshell -p COM3 cp main.py /pyboard
+```
+
+## serial
+You can monitor what is going on with the device by connecting with a client like Putty.
+
+Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on ESP32.
