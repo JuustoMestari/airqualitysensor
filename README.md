@@ -65,3 +65,6 @@ rshell -p COM3 cp main.py /pyboard
 You can monitor what is going on with the device by connecting with a client like Putty.
 
 Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on ESP32.
+
+## Extended sensors
+- GPS : https://ebay.to/2QxuPNT
