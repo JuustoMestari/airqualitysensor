@@ -24,7 +24,6 @@
 - bmp280 : https://github.com/dafvid/micropython-bmp280
 - CCS811 : https://github.com/Notthemarsian/CCS811
 - si7021 : https://github.com/chrisbalmer/micropython-si7021
-- urequests : https://github.com/micropython/micropython-lib/tree/master/urequests
 
 ## firmware
 - Download latest version of micropython for ESP32 : http://micropython.org/download#esp32

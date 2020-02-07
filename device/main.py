@@ -3,9 +3,9 @@ import network
 import time
 import ujson
 import gc
+import urequests as requests
 
 #libraries
-import urequests
 import webserver
 
 #sensors
@@ -13,10 +13,10 @@ import sensors
 
 #Info LED
 INFO_LED = Pin(2, Pin.OUT)
-ENDPOINT = 'http://my.endpoint.com/sensors'
+ENDPOINT = '[http://your.endpoint.com/sensors]'
 #Access Point data
-SSID = 'SSID'
-PASSWORD = 'PASSWORD'
+SSID = '[SSID]'
+PASSWORD = '[PASSWORD]'
 
 def do_connect():
     """do_connect connects to the specified Access Point and Password"""
@@ -32,9 +32,9 @@ def do_connect():
 
 def push_endpoint(timer):
     try:
-        resp = urequests.post(ENDPOINT, json=sensors.get_sensors())
+        resp = requests.post(ENDPOINT, headers = {'content-type': 'application/json'},data=ujson.dumps(sensors.get_sensors()))
         if resp.status_code != 200:
-            print('Error : Status Code : {}'.format(resp.status_code))
+            print('Error : Status Code : {}. Message : {}'.format(resp.status_code,resp.text))
         gc.collect()     
     except Exception as e:
         print('Error: {}'.format(e))
