@@ -19,6 +19,12 @@
 - I2C Address : 64
 - https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf
 
+## Connection
+- Sensor board VCC -> 3.3V ESP32
+- Sensor board GND -> GND  ESP32
+- Sensor board SCL -> IO5  ESP32
+- Sensor board SDA -> IO4  ESP32
+
 ## Libraries
 - Micro Web Server : https://github.com/jczic/MicroWebSrv
 - bmp280 : https://github.com/dafvid/micropython-bmp280
