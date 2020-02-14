@@ -19,6 +19,7 @@ def sensors():
     fields["humidity"]=data["humidity"]
     fields["pressure"]=data["pressure"]
     fields["eco2"]=data["eco2"]
+    fields["mhz19b"]=data["mhz19b"]
     fields["tvoc"]=data["tvoc"]
     datapoint["time"]=datetime.datetime.utcnow()
     datapoint["measurement"]="airquality"
