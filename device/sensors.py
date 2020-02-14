@@ -7,6 +7,7 @@ import ubinascii
 import CCS811
 import si7021
 from bmp280 import BMP280
+import mhz19b
 
 #I2C setup
 i2c = I2C(0,scl=Pin(5), sda=Pin(4))
@@ -26,4 +27,5 @@ def get_sensors():
     if co2_sensor.data_ready():
         sensors["eco2"]=co2_sensor.eCO2
         sensors["tvoc"]=co2_sensor.tVOC
+    sensors["mhz19b"]=mhz19b.get_CO2()
     return sensors

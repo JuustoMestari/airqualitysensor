@@ -19,6 +19,10 @@
 - I2C Address : 64
 - https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf
 
+## MH-Z19b
+- CO2 sensor
+- https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19b-co2-ver1_0.pdf
+
 ## Connection
 - Sensor board VCC -> 3.3V ESP32
 - Sensor board GND -> GND  ESP32

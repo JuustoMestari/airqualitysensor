@@ -14,6 +14,7 @@
 <div id="pressure" style="color: green; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
 <div id="eco2" style="color: orange; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
 <div id="tvoc" style="color: grey; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
+<div id="CO2" style="color: orange; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
 
 <script>
 if(typeof(EventSource) !== 'undefined') {
@@ -28,6 +29,7 @@ if(typeof(EventSource) !== 'undefined') {
         document.getElementById("eco2").innerHTML = sensorData.eco2+" ppm"
         document.getElementById("tvoc").innerHTML = sensorData.tvoc+" ppb"
         document.getElementById("device").innerHTML = sensorData.device
+        document.getElementById("CO2").innerHTML = sensorData.mhz19b+" ppm"
     };
 } else {
     document.getElementById("resultTime").innerHTML = "Sorry, your browser does not support server-sent events...";
