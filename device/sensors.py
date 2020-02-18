@@ -15,6 +15,8 @@ print('I2C devices found : {} '.format(i2c.scan()))
 co2_sensor = CCS811.CCS811(i2c=i2c, addr=90)
 temp_sensor = si7021.Si7021(i2c)
 pressure_sensor = BMP280(i2c)
+#disable Automatic Baseline Correction (ABC)
+mhz19b.set_ABC(False)
 
 def get_sensors():
     sensors= {}
