@@ -23,11 +23,17 @@
 - CO2 sensor
 - https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19b-co2-ver1_0.pdf
 
-## Connection
-- Sensor board VCC -> 3.3V ESP32
-- Sensor board GND -> GND  ESP32
-- Sensor board SCL -> IO5  ESP32
-- Sensor board SDA -> IO4  ESP32
+## Pinout
+| ESP32         | Sensor board  | CO2 sensor  |
+| ------------- |:-------------:| -----------:|
+|VIN		    |               |Vin          |
+|GND		    |               |GND          |
+|TX2		    |               |RX           |
+|RX2		    |               |TX           |
+|3V3	        |VCC            |	          |
+|GND	        |GND            |             |	
+|D4	            |SDA            |             |	
+|D5	            |SCL            |	          |
 
 ## Libraries
 - Micro Web Server : https://github.com/jczic/MicroWebSrv
