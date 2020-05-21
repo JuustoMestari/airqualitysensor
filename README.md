@@ -1,49 +1,29 @@
 # Air quality sensor
 ## Device
 - ESP32 board : https://ebay.to/39Jhv0x
-## Sensors board
-- Sensor board : https://ebay.to/36HKQqx
-
-### BMP280
-- Temperature and Pressure sensor
-- I2C Address : 118
-- https://www.bosch-sensortec.com/products/environmental-sensors/pressure-sensors/pressure-sensors-bmp280-1.html
-
-### CCS811
-- eCO2 and TVOC sensor
-- I2C Address : 90
-- https://ams.com/ccs811
-
-### SI7021
-- Temperature and Humidity sensor
-- I2C Address : 64
-- https://www.silabs.com/documents/public/data-sheets/Si7021-A20.pdf
-
-## MH-Z19b
-- CO2 sensor
-- https://www.winsen-sensor.com/d/files/infrared-gas-sensor/mh-z19b-co2-ver1_0.pdf
-
+## Air quality sensor
+- PMS7003 : https://download.kamami.com/p564008-p564008-PMS7003%20series%20data%20manua_English_V2.5.pdf
+## Temperature/Humidity sensor
+- DHT22 : https://www.sparkfun.com/datasheets/Sensors/Temperature/DHT22.pdf
 ## Pinout
-| ESP32         | Sensor board  | CO2 sensor  |
+| ESP32         | DHT22         | PMS7003     |
 | ------------- |:-------------:| -----------:|
-|VIN		    |               |Vin          |
-|GND		    |               |GND          |
-|TX2		    |               |RX           |
-|RX2		    |               |TX           |
-|3V3	        |VCC            |	          |
-|GND	        |GND            |             |	
-|D4	            |SDA            |             |	
-|D5	            |SCL            |	          |
+|VIN		    |               |             |
+|GND		    |               |             |
+|RST            |               |RST          |
+|IO17		    |               |RX           |
+|IO16		    |               |TX           |
+|3V3	        |VCC            |VCC          |
+|GND	        |GND            |GND          |	
+|IO4            |DATA           |             |	
 
 ## Libraries
 - Micro Web Server : https://github.com/jczic/MicroWebSrv
-- bmp280 : https://github.com/dafvid/micropython-bmp280
-- CCS811 : https://github.com/Notthemarsian/CCS811
-- si7021 : https://github.com/chrisbalmer/micropython-si7021
+- pms7003+AQI : https://github.com/pkucmus/micropython-pms7003
 
 ## firmware
 - Download latest version of micropython for ESP32 : http://micropython.org/download#esp32
-- Flash using instructions from micropython firmware download website using esptool : https://github.com/espressif/esptool
+- Flash using instructions from micropython firmware download website using esptool : https://github.com/espressif/esptool . Esptool requires python module "pyserial" (pip install pyserial)
 ```console
 python esptool.py --chip esp32 --port COM3 erase_flash
 ```
@@ -77,9 +57,14 @@ rshell -p COM3 cp main.py /pyboard
 ```
 
 ## serial
-You can monitor what is going on with the device by connecting with a client like Putty.
-
+You can monitor what is going on with the device by connecting with a client like Putty.  
 Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on ESP32.
 
-## Extended sensors
-- GPS : https://ebay.to/2QxuPNT
+# TODO
+- sync time with ntp server
+- add DHT22 logic
+- improve UI
+  - add gauges
+  - add time series (1 min, 10min, 30min, 1 hour)
+  - add current time
+  - add flash space

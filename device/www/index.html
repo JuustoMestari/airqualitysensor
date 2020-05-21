@@ -8,13 +8,7 @@
 
 <h1>MicroPython Sensors</h1>
 <h2 id="device"></h2>
-<div id="temp1" style="color: red; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
-<div id="humidity" style="color: blueviolet; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
-<div id="temp2" style="color: blue; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
-<div id="pressure" style="color: green; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
-<div id="eco2" style="color: orange; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
-<div id="tvoc" style="color: grey; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
-<div id="CO2" style="color: orange; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
+<div id="aqi" style="color: red; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
 
 <script>
 if(typeof(EventSource) !== 'undefined') {
@@ -22,14 +16,8 @@ if(typeof(EventSource) !== 'undefined') {
     sourceSensors.onmessage = function(e) {
         sensorData = JSON.parse(e.data);
         console.log(sensorData);
-        document.getElementById("temp1").innerHTML = sensorData.temp1+" °C"
-        document.getElementById("humidity").innerHTML = sensorData.humidity+" %"
-        document.getElementById("temp2").innerHTML = sensorData.temp2+" °C"
-        document.getElementById("pressure").innerHTML = sensorData.pressure+" pa"
-        document.getElementById("eco2").innerHTML = sensorData.eco2+" ppm"
-        document.getElementById("tvoc").innerHTML = sensorData.tvoc+" ppb"
-        document.getElementById("device").innerHTML = sensorData.device
-        document.getElementById("CO2").innerHTML = sensorData.mhz19b+" ppm"
+        document.getElementById("device").innerHTML = sensorData.device;
+        document.getElementById("aqi").innerHTML = sensorData.aqi;
     };
 } else {
     document.getElementById("resultTime").innerHTML = "Sorry, your browser does not support server-sent events...";

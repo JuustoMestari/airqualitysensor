@@ -32,9 +32,10 @@ def do_connect():
 
 def push_endpoint(timer):
     try:
-        resp = requests.post(ENDPOINT, headers = {'content-type': 'application/json'},data=ujson.dumps(sensors.get_sensors()))
-        if resp.status_code != 200:
-            print('Error : Status Code : {}. Message : {}'.format(resp.status_code,resp.text))
+        print(ujson.dumps(sensors.get_sensors()))
+        #resp = requests.post(ENDPOINT, headers = {'content-type': 'application/json'},data=ujson.dumps(sensors.get_sensors()))
+        #if resp.status_code != 200:
+        #    print('Error : Status Code : {}. Message : {}'.format(resp.status_code,resp.text))
         gc.collect()     
     except Exception as e:
         print('Error: {}'.format(e))
@@ -45,7 +46,7 @@ do_connect()
 #Clock timer
 TIMR = Timer(-1)
 TIMR.init(period=60000, mode=Timer.PERIODIC, callback=push_endpoint)
-
+push_endpoint(0)
 #Start WebServer
 webserver.start_webserver()
 
