@@ -3,26 +3,26 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/moment.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
 
-<h1>MicroPython Sensors</h1>
-<h2 id="device"></h2>
-<div id="aqi" style="color: red; font-size: 200%; font-family: Monaco, monospace; margin: 20px"></div>
-
-<script>
-if(typeof(EventSource) !== 'undefined') {
-    const sourceSensors = new EventSource('http://' + window.location.hostname + '/sensors');
-    sourceSensors.onmessage = function(e) {
-        sensorData = JSON.parse(e.data);
-        console.log(sensorData);
-        document.getElementById("device").innerHTML = sensorData.device;
-        document.getElementById("aqi").innerHTML = sensorData.aqi;
-    };
-} else {
-    document.getElementById("resultTime").innerHTML = "Sorry, your browser does not support server-sent events...";
-}
-</script>
+<h1>Sensor : <b id="device"></b></h1>
+<h3>
+    <label for="timeSelector">Time period:</label>
+    <select id="timeSelector">
+        <option value="1" default>1 min</option>
+        <option value="10">10 min</option>
+        <option value="30">30 min</option>
+        <option value="60">60 min</option>
+    </select>
+</h3>
+<div id="chartArea">
+    <canvas id="sensorChart"></canvas>
+</div>
 
 </body>
 </html>

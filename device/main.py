@@ -7,6 +7,7 @@ import urequests as requests
 
 #libraries
 import webserver
+import aggregate
 
 #sensors
 import sensors
@@ -17,6 +18,9 @@ ENDPOINT = '[http://your.endpoint.com/sensors]'
 #Access Point data
 SSID = '[SSID]'
 PASSWORD = '[PASSWORD]'
+
+#aggregate
+aggcounter=0
 
 def do_connect():
     """do_connect connects to the specified Access Point and Password"""
@@ -32,10 +36,23 @@ def do_connect():
 
 def push_endpoint(timer):
     try:
-        print(ujson.dumps(sensors.get_sensors()))
+        sensordata=sensors.get_sensors()
+       
         #resp = requests.post(ENDPOINT, headers = {'content-type': 'application/json'},data=ujson.dumps(sensors.get_sensors()))
         #if resp.status_code != 200:
         #    print('Error : Status Code : {}. Message : {}'.format(resp.status_code,resp.text))
+
+        #aggregate data
+        if counter%60==0:
+            aggregate.run(60,sensordata)
+            counter=0
+        if counter%30==0:
+            aggregate.run(30,sensordata)
+        if counter%10==0:
+            aggregate.run(10,sensordata)
+        aggregate.run(1,sensordata)
+        counter=counter+1
+        print(ujson.dumps(sensordata))
         gc.collect()     
     except Exception as e:
         print('Error: {}'.format(e))
