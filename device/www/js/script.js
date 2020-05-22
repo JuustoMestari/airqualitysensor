@@ -45,7 +45,6 @@ var getJSON = function(url, callback) {
 };
 
 var setupStats = function(stats){
-    
     document.getElementById("device").innerHTML = `${stats.device} : Available space : 
         ${humanFileSize(stats.freespace,true)}/${humanFileSize(stats.totalspace,true)}`;
 }
@@ -84,12 +83,15 @@ var setupGraph = function(dataset){
     var chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
+        
         // The data for our dataset
         data: {
             datasets: datasetList
         },
         // Configuration options go here
         options: {
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 xAxes: [{
                     type: 'time',

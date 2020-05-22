@@ -3,26 +3,49 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
+    <link rel="stylesheet" href="css/grid.min.css">
+    <link rel="stylesheet" href="css/card.min.css">
+    <link rel="stylesheet" href="css/container.min.css">
+    <link rel="stylesheet" href="css/header.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/moment.min.js"></script>
     <script src="js/chart.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
-
-<h1>Device : <b id="device"></b></h1>
-<h3>
-    <label for="timeSelector">Time period:</label>
-    <select id="timeSelector">
-        <option value="1" default>1 min</option>
-        <option value="10">10 min</option>
-        <option value="30">30 min</option>
-        <option value="60">60 min</option>
-    </select>
-</h3>
-<div id="chartArea">
-    <canvas id="sensorChart"></canvas>
-</div>
-
+    <div class="app-wrapper">
+        <div class="ui grid container main">
+            <div class="sixteen wide column">
+                <div class="ui fluid card">
+                    <div class="content extra title">
+                        <div class="ui grid divided middle two column">
+                            <div class="row">
+                                <div class="eight wide column">
+                                    <h1 class="ui header" id="deviceSerial">H1
+                                        <div class="sub header" id="deviceVersion">Sub Header</div>
+                                    </h1>
+                                </div>
+                                <div class="five wide column">
+                                    <progress max="100" value="80"></progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content extra chart">
+                        <canvas id="sensorChart"></canvas>
+                    </div>
+                    <div class="content extra settings">
+                        <label for="timeSelector">Time period:</label>
+                        <select id="timeSelector">
+                            <option value="1" default>1 min</option>
+                            <option value="10">10 min</option>
+                            <option value="30">30 min</option>
+                            <option value="60">60 min</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
