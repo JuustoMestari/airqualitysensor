@@ -17,9 +17,9 @@ def _httpHandlerTimeGet(httpClient, httpResponse):
         
     httpResponse.WriteResponseOk(
         headers=({'Cache-Control': 'no-cache'}),
-        contentType='text/event-stream',
+        contentType='application/json',
         contentCharset='UTF-8',
-        content='data: {0}\n\n'.format(data))
+        content='{0}\n\n'.format(data))
 
 @MicroWebSrv.route('/stats')
 def _httpHandlerTimeGet(httpClient, httpResponse):
@@ -31,9 +31,9 @@ def _httpHandlerTimeGet(httpClient, httpResponse):
         
     httpResponse.WriteResponseOk(
         headers=({'Cache-Control': 'no-cache'}),
-        contentType='text/event-stream',
+        contentType='application/json',
         contentCharset='UTF-8',
-        content='data: {0}\n\n'.format(data))
+        content='{0}\n\n'.format(data))
 
 def start_webserver():
     """start_webserver"""

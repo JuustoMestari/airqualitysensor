@@ -61,10 +61,12 @@ You can monitor what is going on with the device by connecting with a client lik
 Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on ESP32.
 
 # TODO
-- sync time with ntp server
+- ~~sync time with ntp server~~
 - add DHT22 logic
 - improve UI
   - add gauges
-  - add time series (1 min, 10min, 30min, 1 hour)
+  - ~~add time series (1 min, 10min, 30min, 1 hour)~~
   - add current time
-  - add flash space
+  - ~~add flash space~~
+  - use progressbar for flash space
+  - automatically refresh UI every minute

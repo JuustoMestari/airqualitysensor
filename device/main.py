@@ -1,4 +1,4 @@
-from machine import Pin, Timer
+from machine import Pin, Timer,RTC
 import network
 import ntptime 
 import time
@@ -17,8 +17,8 @@ import sensors
 INFO_LED = Pin(2, Pin.OUT)
 ENDPOINT = '[http://your.endpoint.com/sensors]'
 #Access Point data
-SSID = '[SSID]'
-PASSWORD = '[PASSWORD]'
+SSID = 'SSID'
+PASSWORD = 'PASSWORD'
 
 #aggregate
 aggcounter=0
@@ -38,21 +38,24 @@ def do_connect():
 def push_endpoint(timer):
     try:
         sensordata=sensors.get_sensors()
-       
+        #no need to do anything if air quality index is 0
+        if sensordata["metrics"]["aqi"]==0:
+            return
         #resp = requests.post(ENDPOINT, headers = {'content-type': 'application/json'},data=ujson.dumps(sensors.get_sensors()))
         #if resp.status_code != 200:
         #    print('Error : Status Code : {}. Message : {}'.format(resp.status_code,resp.text))
 
         #aggregate data
-        if counter%60==0:
+        global aggcounter
+        if aggcounter%60==0:
             aggregate.run(60,sensordata)
-            counter=0
-        if counter%30==0:
+            aggcounter=0
+        if aggcounter%30==0:
             aggregate.run(30,sensordata)
-        if counter%10==0:
+        if aggcounter%10==0:
             aggregate.run(10,sensordata)
         aggregate.run(1,sensordata)
-        counter=counter+1
+        aggcounter=aggcounter+1
         print(ujson.dumps(sensordata))
         gc.collect()     
     except Exception as e:
@@ -62,14 +65,14 @@ def push_endpoint(timer):
 do_connect()
 
 #sync ntp
+rtc = RTC()
+ntptime.host = '192.168.39.1'
 ntptime.settime()
-
-print(ntptime.time())
 
 #Clock timer
 TIMR = Timer(-1)
 TIMR.init(period=60000, mode=Timer.PERIODIC, callback=push_endpoint)
-push_endpoint(0)
+
 #Start WebServer
 webserver.start_webserver()
 

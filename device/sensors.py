@@ -1,5 +1,6 @@
 """sensors.py"""
 import machine
+import utime
 from machine import Pin, I2C
 import ubinascii
 import uos
@@ -13,8 +14,14 @@ pms = Pms7003(uart=2)
 def get_sensors():
     sensors= {}
     pms_data=pms.read()
-    sensors["timestamp"]=1234567890
+    #add 946684800 because micropython epoch starts 2000-01-01 00:00:00 UTC
+    sensors["timestamp"]=utime.time()+946684800
     sensors["metrics"]=pms_data
+    #remove unecessary data from pms
+    del sensors["metrics"]["CHECKSUM"]
+    del sensors["metrics"]["ERROR"]
+    del sensors["metrics"]["FRAME_LENGTH"]
+    del sensors["metrics"]["VERSION"]
     sensors["metrics"]["aqi"]=AQI.aqi(pms_data['PM2_5_ATM'], pms_data['PM10_0_ATM'])
     #TODO : Update temp and hum to use DHT22 library
     sensors["metrics"]["temperature"]=23.2
