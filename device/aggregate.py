@@ -32,7 +32,7 @@ def run(duration,sensordata):
             sensorhistory = json.load(json_from)[-aggregationValues[durationIndexFound][1]:]
             #TODO : actual aggregation : avg, min, max, ...
             #For now, just take the last one
-            sensordata = sensorhistory[-1:]
+            sensordata = sensorhistory[-1:][0]
     #3 add new element
     sensorhistory.append(sensordata)
     #4 save to flash
