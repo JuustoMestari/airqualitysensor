@@ -1,5 +1,6 @@
 from machine import Pin, Timer
 import network
+import ntptime 
 import time
 import ujson
 import gc
@@ -59,6 +60,11 @@ def push_endpoint(timer):
 
 #connect to wifi
 do_connect()
+
+#sync ntp
+ntptime.settime()
+
+print(ntptime.time())
 
 #Clock timer
 TIMR = Timer(-1)
