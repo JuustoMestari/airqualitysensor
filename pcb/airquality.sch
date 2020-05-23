@@ -1,0 +1,212 @@
+EESchema Schematic File Version 5
+EELAYER 32 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
+$EndDescr
+Connection ~ 2750 1750
+Connection ~ 5000 3700
+Connection ~ 5000 3600
+NoConn ~ 3650 2050
+NoConn ~ 3650 2150
+NoConn ~ 3650 2250
+Wire Wire Line
+	2550 1950 2550 2500
+Wire Wire Line
+	2700 2050 3150 2050
+Wire Wire Line
+	2700 2150 3150 2150
+Wire Wire Line
+	2700 2250 3150 2250
+Wire Wire Line
+	2750 1500 2750 1750
+Wire Wire Line
+	2750 1750 2750 1850
+Wire Wire Line
+	2900 3250 3250 3250
+Wire Wire Line
+	2900 3350 3250 3350
+Wire Wire Line
+	2900 3450 3300 3450
+Wire Wire Line
+	3150 1850 2750 1850
+Wire Wire Line
+	3150 1950 2550 1950
+Wire Wire Line
+	3250 3050 3250 3250
+Wire Wire Line
+	3300 3450 3300 3550
+Wire Wire Line
+	3650 1850 3750 1850
+Wire Wire Line
+	3650 1950 4550 1950
+Wire Wire Line
+	3750 1750 2750 1750
+Wire Wire Line
+	3750 1850 3750 1750
+Wire Wire Line
+	4550 1950 4550 2550
+Wire Wire Line
+	5000 3500 5000 3600
+Wire Wire Line
+	5000 3600 5000 3700
+Wire Wire Line
+	5000 3600 5450 3600
+Wire Wire Line
+	5000 3700 5000 3950
+Wire Wire Line
+	5000 3700 5450 3700
+Wire Wire Line
+	5200 1500 5200 1250
+Wire Wire Line
+	5200 1700 5450 1700
+Wire Wire Line
+	5200 2300 5450 2300
+Wire Wire Line
+	5200 2400 5450 2400
+Wire Wire Line
+	5200 2500 5450 2500
+Wire Wire Line
+	5450 1500 5200 1500
+Wire Wire Line
+	5450 3500 5000 3500
+Wire Wire Line
+	7000 1500 7600 1500
+Text Label 2700 2050 0    50   ~ 0
+RST
+Text Label 2700 2150 0    50   ~ 0
+RX
+Text Label 2700 2250 0    50   ~ 0
+TX
+Text Label 2750 1600 2    50   ~ 0
+5V
+Text Label 3250 3050 2    50   ~ 0
+3V3
+Text Label 3250 3350 2    50   ~ 0
+IO18
+Text Label 5200 1300 2    50   ~ 0
+5V
+Text Label 5200 1700 0    50   ~ 0
+RST
+Text Label 5200 2300 0    50   ~ 0
+RX
+Text Label 5200 2400 0    50   ~ 0
+TX
+Text Label 5200 2500 0    50   ~ 0
+IO18
+Text Label 7600 1500 2    50   ~ 0
+3V3
+$Comp
+L SparkFun-PowerSymbols:5V #SUPPLY0102
+U 1 1 5ED2374A
+P 2750 1500
+F 0 "#SUPPLY0102" H 2800 1500 45  0001 L BNN
+F 1 "5V" H 2650 1562 45  0001 C CNN
+F 2 "XXX-00000" H 2750 1319 60  0001 C CNN
+F 3 "" H 2750 1500 60  0001 C CNN
+	1    2750 1500
+	1    0    0    -1  
+$EndComp
+$Comp
+L SparkFun-PowerSymbols:5V #SUPPLY0101
+U 1 1 5ED3795F
+P 5200 1250
+F 0 "#SUPPLY0101" H 5250 1250 45  0001 L BNN
+F 1 "5V" H 5100 1312 45  0001 C CNN
+F 2 "XXX-00000" H 5200 1069 60  0001 C CNN
+F 3 "" H 5200 1250 60  0001 C CNN
+	1    5200 1250
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5ED2A55B
+P 2550 2500
+F 0 "#PWR0103" H 2550 2250 50  0001 C CNN
+F 1 "GND" H 2450 2493 50  0000 C CNN
+F 2 "" H 2550 2500 50  0001 C CNN
+F 3 "" H 2550 2500 50  0001 C CNN
+	1    2550 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5ED40C24
+P 3300 3550
+F 0 "#PWR0104" H 3300 3300 50  0001 C CNN
+F 1 "GND" H 3200 3543 50  0000 C CNN
+F 2 "" H 3300 3550 50  0001 C CNN
+F 3 "" H 3300 3550 50  0001 C CNN
+	1    3300 3550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5ED2E311
+P 4550 2550
+F 0 "#PWR0101" H 4550 2300 50  0001 C CNN
+F 1 "GND" H 4450 2543 50  0000 C CNN
+F 2 "" H 4550 2550 50  0001 C CNN
+F 3 "" H 4550 2550 50  0001 C CNN
+	1    4550 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5ED3A3D1
+P 5000 3950
+F 0 "#PWR0102" H 5000 3700 50  0001 C CNN
+F 1 "GND" H 4900 4046 50  0000 C CNN
+F 2 "" H 5000 3950 50  0001 C CNN
+F 3 "" H 5000 3950 50  0001 C CNN
+	1    5000 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x03 J1
+U 1 1 5ED3E7D6
+P 2700 3350
+F 0 "J1" H 2782 3027 50  0000 C CNN
+F 1 "DHT22" H 2782 3118 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Horizontal" H 2700 3350 50  0001 C CNN
+F 3 "~" H 2700 3350 50  0001 C CNN
+	1    2700 3350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x05_Odd_Even J2
+U 1 1 5ED21487
+P 3350 2050
+F 0 "J2" H 3400 1634 50  0000 C CNN
+F 1 "PMS7003" H 3400 1725 50  0000 C CNN
+F 2 "Connector_PinHeader_1.00mm:PinHeader_2x05_P1.00mm_Vertical" H 3350 2050 50  0001 C CNN
+F 3 "~" H 3350 2050 50  0001 C CNN
+	1    3350 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L DavidCustomLibrary:ESP32_Wemos U1
+U 1 1 5ED3039E
+P 6250 2500
+F 0 "U1" H 6225 1277 50  0000 C CNN
+F 1 "ESP32_Wemos" H 6225 1368 50  0000 C CNN
+F 2 "DavidCustom:ESP32_Wemos" H 6650 2600 50  0001 C CNN
+F 3 "" H 6650 2600 50  0001 C CNN
+	1    6250 2500
+	1    0    0    -1  
+$EndComp
+$EndSCHEMATC
