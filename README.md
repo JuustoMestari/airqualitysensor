@@ -62,7 +62,7 @@ Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on 
 
 # TODO
 - ~~sync time with ntp server~~
-- add DHT22 logic
+- ~~add DHT22 logic~~
 - improve logic if pms7003 returns AQI of 0
 - improve UI
   - add gauges

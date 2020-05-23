@@ -6,16 +6,19 @@ from machine import Pin, I2C
 import ubinascii
 import uos
 import network
+import dht
 
 #libraries
 from pms7003 import Pms7003
 from aqi import AQI
 
 pms = Pms7003(uart=2)
+d = dht.DHT22(machine.Pin(18))
 
 def get_sensors():
     sensors= {}
     pms_data=pms.read()
+    d.measure()
     #add 946684800 because micropython epoch starts 2000-01-01 00:00:00 UTC
     sensors["timestamp"]=utime.time()+946684800
     sensors["metrics"]=pms_data
@@ -26,8 +29,8 @@ def get_sensors():
     del sensors["metrics"]["VERSION"]
     sensors["metrics"]["aqi"]=AQI.aqi(pms_data['PM2_5_ATM'], pms_data['PM10_0_ATM'])
     #TODO : Update temp and hum to use DHT22 library
-    sensors["metrics"]["temperature"]=23.2
-    sensors["metrics"]["humidity"]=45.3
+    sensors["metrics"]["temperature"]=d.temperature()
+    sensors["metrics"]["humidity"]=d.humidity()
     return sensors
 
 def get_stats():
