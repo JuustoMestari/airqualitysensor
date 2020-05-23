@@ -30,9 +30,9 @@ def run(duration,sensordata):
         with open('www/json/sensors_{}.json'.format(aggregationValues[durationIndexFound-1][0])) as json_from:
             #take last n elements to calculate aggregation
             agghistory = json.load(json_from)[-aggregationValues[durationIndexFound][1]:]
-            #TODO : actual aggregation : avg, min, max, ...
-            #For now, just take the last one
-            sensordata = agghistory[-1:][0]
+            for key in agghistory[0]['metrics']:
+                #actual aggregation : avg, min, max, ...
+                sensordata['metrics'][key]=round(sum(i['metrics'][key] for i in agghistory)/len(agghistory),2)
     #3 add new element
     sensorhistory.append(sensordata)
     #4 save to flash
