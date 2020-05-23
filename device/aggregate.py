@@ -21,18 +21,18 @@ def run(duration,sensordata):
     sensorhistory= None
     with open('www/json/sensors_{}.json'.format(duration)) as json_file:
         sensorhistory = json.load(json_file)
+        #2 take the last n values
         if len(sensorhistory)>=historyMaxValues:
             sensorhistory = sensorhistory[-historyMaxValues:]
-        #2 remove first element if we are at the capacity limit
         #print('{} records in sensors_{}.json'.format(len(sensorhistory),duration))
     #calculate new value from previous dataset (if not 1 minute aggregation)
     if aggregationValues[durationIndexFound][1] != 0:
         with open('www/json/sensors_{}.json'.format(aggregationValues[durationIndexFound-1][0])) as json_from:
             #take last n elements to calculate aggregation
-            sensorhistory = json.load(json_from)[-aggregationValues[durationIndexFound][1]:]
+            agghistory = json.load(json_from)[-aggregationValues[durationIndexFound][1]:]
             #TODO : actual aggregation : avg, min, max, ...
             #For now, just take the last one
-            sensordata = sensorhistory[-1:][0]
+            sensordata = agghistory[-1:][0]
     #3 add new element
     sensorhistory.append(sensordata)
     #4 save to flash
