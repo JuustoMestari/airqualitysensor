@@ -9,7 +9,8 @@
 } else {
     document.getElementById("resultTime").innerHTML = "Sorry, your browser does not support server-sent events...";
 }*/
-let selectedTimeValue="1"
+let selectedTimeValue="1";
+let chart = {};
 document.addEventListener("DOMContentLoaded", function(event) { 
     //retrieve device stats
     getJSON('stats',function(err, data) {
@@ -20,73 +21,57 @@ document.addEventListener("DOMContentLoaded", function(event) {
         }
     });
     //retrieve json
-    updateGraph(selectedTimeValue);
+    setupChart();
+    getChartData(selectedTimeValue);
     
     document.getElementById("timeSelector").addEventListener("change",(e)=>{
         selectedTimeValue=e.target.value;
-        updateGraph(selectedTimeValue);
+        getChartData(selectedTimeValue);
+    });
+    document.getElementById("chartUpdate").addEventListener("click",(e)=>{
+        getChartData(selectedTimeValue);
     });
 });
 
 
-var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-    xhr.send();
-};
-
 var setupStats = function(stats){
-    document.getElementById("device").innerHTML = `${stats.device} : Available space : 
-        ${humanFileSize(stats.freespace,true)}/${humanFileSize(stats.totalspace,true)}`;
+    //test data
+    //stats = {"signalstrength": -55, "network": ["192.168.39.85", "255.255.255.0", "192.168.39.1", "192.168.10.50"], "mac": "24:0a:c4:c6:7d:30", "device": "240ac4c67d30", "freespace": 1560576, "totalspace": 2097152, "version": "1.12.0", "time": 1590211817, "essid": "NeonHA"};
+    
+    //Setup device name and version
+    document.getElementById("deviceSerial").innerHTML = `${stats.device}`
+    document.getElementById("deviceVersion").innerHTML = `version : ${stats.version}`
+
+    //Setup storage
+    let usedspace = stats.totalspace-stats.freespace;
+    let storagebarLabel = `${humanFileSize(usedspace,true)}/${humanFileSize(stats.totalspace,true)}`;
+    let storagebarPercent = (usedspace/stats.totalspace)*100;
+    let storagebarClass = (storagebarPercent>75)?"error":"success";
+    let DOMstoragebar = document.getElementById("storagebar");
+    DOMstoragebar.classList.add(storagebarClass);
+    DOMstoragebar.querySelector('.label').innerHTML=storagebarLabel;
+    DOMstoragebar.querySelector('.bar').style.width=`${storagebarPercent}%`;
+
+    //Setup network
+    document.getElementById("networkIP").innerHTML = `${stats.network[0]}`
+    document.getElementById("networkMAC").innerHTML = `${stats.mac}`
+    document.getElementById("networkAP").innerHTML = `${stats.essid}`
+    document.getElementById("networkRSSI").innerHTML = `strength : ${stats.signalstrength} dB`
+
+    //Setup time
+    document.getElementById("deviceTime").innerHTML = `${moment(stats.time*1000).format('DD.MM.YY HH:mm')}`
+        
 }
 
-var setupGraph = function(dataset){
-    datasetList = [];
-    //create datapoints
-    dataset.forEach((point,i)=>{
-        let ts = moment(point.timestamp*1000);
-        //loop thru each metric
-        for (var k in point.metrics)
-        {
-            //check if there is already a dataset for that key
-            if (!datasetList.find(x=>x.label==k)){
-                //dataset not found, create it
-                let newDS = {
-                    label: k,
-                    backgroundColor: 'rgba(0, 0, 0,0)',
-                    borderColor: randomColor(),
-                    data: []
-                }
-                datasetList.push(newDS);
-            }
-            //add data to dataset
-            let foundDatasetIndex = datasetList.findIndex(x=>x.label==k);
-            if (foundDatasetIndex!=-1){
-                datasetList[foundDatasetIndex].data.push({
-                    x:ts,
-                    y:point.metrics[k]
-                })
-            }
-        }
-        
-    });
+var setupChart = function(){
     var ctx = document.getElementById('sensorChart').getContext('2d');
-    var chart = new Chart(ctx, {
+    chart = new Chart(ctx, {
         // The type of chart we want to create
         type: 'line',
         
         // The data for our dataset
         data: {
-            datasets: datasetList
+            datasets: []
         },
         // Configuration options go here
         options: {
@@ -104,17 +89,70 @@ var setupGraph = function(dataset){
     });
 }
 
-var updateGraph = function(timeSelector){
+var getChartData = function(timeSelector){
     //add timestamp to end of query so the browser does not cache the json
     getJSON('json/sensors_'+timeSelector+'.json?t='+moment().format('X'),function(err, data) {
         if (err !== null) {
             console.error('Something went wrong: ' + err);
         } else {
-            setupGraph(data);
-            
+            updateChart(data);
         }
     });
 }
+
+var updateChart = function(dataset){
+
+    //clear all datasets data
+    chart.data.datasets.forEach(ds=>{
+        ds.data=[];
+    })
+    //loop thru json datapoints
+    dataset.forEach((point,i)=>{
+        let ts = moment(point.timestamp*1000);
+        //loop thru each metric
+        for (var k in point.metrics)
+        {
+            let foundDataset = chart.data.datasets.find(x=>x.label==k)
+            
+            //check if there is already a dataset for that key
+            if (!foundDataset){
+                //dataset not found, create it
+                foundDataset = {
+                    label: k,
+                    hidden: true,
+                    backgroundColor: 'rgba(0, 0, 0,0)',
+                    borderColor: randomColor(),
+                    data: []
+                }
+                //push dataset to chart
+                chart.data.datasets.push(foundDataset);
+            }
+            //add data to dataset
+            chart.data.datasets.find(x=>x.label==k).data.push({
+                x:ts,
+                y:point.metrics[k]
+            });
+        }
+    });
+    chart.update();
+}
+
+
+//tools
+var getJSON = function(url, callback) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+    xhr.onload = function() {
+      var status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+    xhr.send();
+};
 
 var randomColor = function() {
     var r = Math.floor(Math.random() * 255);

@@ -32,3 +32,12 @@ div.ui.card > div.content.settings{
 #sensorChart{
     display:flex;
 }
+#storagebar{
+    margin:0 0 1.7em;
+}
+#storagebar > div.label{
+    top:0%;
+}
+div.ui.grid.device > div.row > .column{
+    text-align: center;
+}

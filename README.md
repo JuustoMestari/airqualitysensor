@@ -67,8 +67,9 @@ Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on 
 - improve UI
   - add gauges
   - ~~add time series (1 min, 10min, 30min, 1 hour)~~
-  - add current time
+  - ~~add current time~~
   - ~~add flash space~~
-  - use progressbar for flash space
+  - ~~use progressbar for flash space~~
   - automatically refresh UI every minute
-  - improve page's css so graph is responsive, using flex
+  - ~~improve page's css so graph is responsive, using flex~~
+  - Fix metric colors

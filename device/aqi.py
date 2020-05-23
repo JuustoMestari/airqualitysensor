@@ -1,3 +1,4 @@
+#https://en.wikipedia.org/wiki/Air_quality_index#Computing_the_AQI
 class AQI:
     AQI = (
         (0, 50),

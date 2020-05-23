@@ -21,7 +21,7 @@ SSID = 'SSID'
 PASSWORD = 'PASSWORD'
 
 #aggregate
-aggcounter=0
+aggcounter=1
 
 def do_connect():
     """do_connect connects to the specified Access Point and Password"""
@@ -39,8 +39,8 @@ def push_endpoint(timer):
     try:
         sensordata=sensors.get_sensors()
         #no need to do anything if air quality index is 0
-        if sensordata["metrics"]["aqi"]==0:
-            return
+        #if sensordata["metrics"]["aqi"]==0:
+            #return
         #resp = requests.post(ENDPOINT, headers = {'content-type': 'application/json'},data=ujson.dumps(sensors.get_sensors()))
         #if resp.status_code != 200:
         #    print('Error : Status Code : {}. Message : {}'.format(resp.status_code,resp.text))
@@ -72,6 +72,8 @@ ntptime.settime()
 #Clock timer
 TIMR = Timer(-1)
 TIMR.init(period=60000, mode=Timer.PERIODIC, callback=push_endpoint)
+
+print(ujson.dumps(sensors.get_stats()))
 
 #Start WebServer
 webserver.start_webserver()

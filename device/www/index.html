@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/card.min.css">
     <link rel="stylesheet" href="css/container.min.css">
     <link rel="stylesheet" href="css/header.min.css">
+    <link rel="stylesheet" href="css/progress.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/moment.min.js"></script>
     <script src="js/chart.min.js"></script>
@@ -18,15 +19,42 @@
             <div class="sixteen wide column">
                 <div class="ui fluid card">
                     <div class="content extra title">
-                        <div class="ui grid divided middle two column">
+                        <div class="ui grid divided middle aligned two column device">
                             <div class="row">
-                                <div class="eight wide column">
-                                    <h1 class="ui header" id="deviceSerial">H1
+                                <div class="two wide column">
+                                    <h1 class="ui header"><span id="deviceSerial">H1</span>
                                         <div class="sub header" id="deviceVersion">Sub Header</div>
                                     </h1>
                                 </div>
-                                <div class="five wide column">
-                                    <progress max="100" value="80"></progress>
+                               
+                                <div class="two wide column">
+                                    <h2 class="ui header"><span id="networkIP">192.168.000.000</span>
+                                        <div class="sub header" id="networkMAC">00:00:00:00:00:00</div>
+                                    </h2>
+                                </div>
+                                <div class="two wide column">
+                                    <h2 class="ui header"><span id="networkAP">AccessPoint</span>
+                                        <div class="sub header" id="networkRSSI">rssi: 9999</div>
+                                    </h2>
+                                </div>
+                                <div class="two wide column">
+                                    <h2 class="ui header">
+                                        <div class="ui progress tiny" id="storagebar" >
+                                            <div class="bar" style="width:50%;">
+                                        </div>
+                                            <div class="label">??MB/??MB</div>
+                                        </div>
+                                        <div class="sub header">flash storage</div>
+                                    </h2>
+                                    
+                                </div>
+                                <div class="four wide column">
+                                     
+                                </div>
+                                <div class="two wide right floated column">
+                                    <h2 class="ui header"><span id="deviceTime">24.05.20 15:00</span>
+                                        <div class="sub header">device time</div>
+                                    </h2>
                                 </div>
                             </div>
                         </div>
@@ -42,6 +70,7 @@
                             <option value="30">30 min</option>
                             <option value="60">60 min</option>
                         </select>
+                        <button id="chartUpdate">Update</button> 
                     </div>
                 </div>
             </div>
