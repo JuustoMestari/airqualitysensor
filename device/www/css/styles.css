@@ -15,7 +15,7 @@ div.ui.grid.main > div.column.wide{
     overflow: auto;
 }
 div.ui.container.main{
-    width: 98%!important;
+    width: 97%!important;
     margin: 0;
     flex-direction: row;
 }
@@ -40,4 +40,21 @@ div.ui.card > div.content.settings{
 }
 div.ui.grid.device > div.row > .column{
     text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+    div.ui.card > div.content.title,
+    div.ui.card > div.content.settings{
+        max-height:50px;
+        overflow:auto;
+    }
+    div.ui.card > div.content.title > div.grid > div.row > div.wide.column{
+        padding:10px !important;
+    }
+}
+
+@media only screen and (max-width: 1544px) and (min-width: 767px) {
+    div.ui.card > div.content.title{
+        display: none;
+    }
 }
