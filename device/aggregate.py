@@ -3,7 +3,7 @@ import time
 import gc
 
 aggregationValues=[[1,0],[10,10],[30,3],[60,2]]
-historyMaxValues=100
+historyMaxValues=50
 
 def run(duration,sensordata):
     print('Running aggregate for {} ...'.format(duration))
