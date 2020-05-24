@@ -74,3 +74,4 @@ Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on 
   - ~~improve page's css so graph is responsive, using flex~~
   - Fix metric colors
   - change graph scale depending on period (1,10,30,60)
+  - fix grid on mobile
