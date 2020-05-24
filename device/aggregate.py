@@ -1,5 +1,6 @@
 import json
 import time
+import gc
 
 aggregationValues=[[1,0],[10,10],[30,3],[60,2]]
 historyMaxValues=100
@@ -39,3 +40,4 @@ def run(duration,sensordata):
     with open('www/json/sensors_{}.json'.format(duration),'w') as outfile:
         json.dump(sensorhistory, outfile)
     return
+    gc.collect()  
