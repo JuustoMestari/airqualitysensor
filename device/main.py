@@ -3,7 +3,7 @@ import network
 import ntptime 
 import time
 import ujson
-import gc
+
 import urequests as requests
 
 #libraries
@@ -56,8 +56,7 @@ def push_endpoint(timer):
             aggregate.run(10,sensordata)
         aggregate.run(1,sensordata)
         aggcounter=aggcounter+1
-        print(ujson.dumps(sensordata))
-        gc.collect()     
+        print(ujson.dumps(sensordata))  
     except Exception as e:
         print('Error: {}'.format(e))
 
