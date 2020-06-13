@@ -1,4 +1,4 @@
-update=Tue 26 May 2020 16:07:47 EEST
+update=Sat 30 May 2020 10:45:57 EEST
 version=1
 last_client=kicad
 [general]
@@ -16,12 +16,12 @@ LibDir=
 version=1
 [PcbFrame]
 version=1
-[ModEditFrame]
-version=1
 [LibeditFrame]
 version=1
 [sheetnames]
 1=00000000-0000-0000-0000-00005ecd0740:
+[ModEditFrame]
+version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -83,7 +83,7 @@ DimensionPrecision=1
 SolderMaskClearance=0.05
 SolderMaskMinWidth=0
 SolderPasteClearance=0
-SolderPasteRatio=-0
+SolderPasteRatio=0
 [pcbnew/Layer.F.Cu]
 Name=F.Cu
 Type=0
