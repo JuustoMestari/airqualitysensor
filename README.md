@@ -8,13 +8,13 @@
 ## Pinout
 | ESP32         | DHT22         | PMS7003     |
 | ------------- |:-------------:| -----------:|
-|VIN		    |               |             |
-|GND		    |               |             |
+|VIN		        |               |             |
+|GND		        |               |             |
 |RST            |               |RST          |
-|IO17		    |               |RX           |
-|IO16		    |               |TX           |
-|3V3	        |VCC            |VCC          |
-|GND	        |GND            |GND          |	
+|IO17		        |               |RX           |
+|IO16		        |               |TX           |
+|3V3	          |VCC            |VCC          |
+|GND	          |GND            |GND          |	
 |IO4            |DATA           |             |	
 
 ## Libraries
@@ -65,7 +65,7 @@ Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on 
 - ~~add DHT22 logic~~
 - improve logic if pms7003 returns AQI of 0
 - improve UI
-  - add gauges
+  - ~~add gauges~~
   - ~~add time series (1 min, 10min, 30min, 1 hour)~~
   - ~~add current time~~
   - ~~add flash space~~
@@ -73,5 +73,5 @@ Set port (COMX or /dev/ttyUSBX) and speed to 115200. Press reset button (EN) on 
   - automatically refresh UI every minute
   - ~~improve page's css so graph is responsive, using flex~~
   - Fix metric colors
-  - change graph scale depending on period (1,10,30,60)
-  - improve display on mobile
+  - ~~change graph scale depending on period (1,10,30,60)~~
+  - ~~improve display on mobile~~
