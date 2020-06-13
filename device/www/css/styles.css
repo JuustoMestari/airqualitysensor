@@ -15,7 +15,7 @@ div.ui.grid.main > div.column.wide{
     overflow: auto;
 }
 div.ui.container.main{
-    width: 97%!important;
+    width: 95%!important;
     margin: 0;
     flex-direction: row;
 }
@@ -42,19 +42,40 @@ div.ui.grid.device > div.row > .column{
     text-align: center;
 }
 
-@media only screen and (max-width: 767px) {
-    div.ui.card > div.content.title,
-    div.ui.card > div.content.settings{
-        max-height:50px;
-        overflow:auto;
+@media only screen and (max-width: 1544px) {
+    div.ui.card > div.content.title{
+        height:50px;
     }
-    div.ui.card > div.content.title > div.grid > div.row > div.wide.column{
+    div.ui.card > div.content.title > div.grid > div.row {
+        padding:0 !important;
+    }
+    div.ui.card > div.content.title > div.grid > div.row > div.two.wide.column{
         padding:10px !important;
+        width:100% !important;
+    }
+    .hidemobile{
+        display:none !important;
+    }
+    .gauge{
+        text-align: center;
+        height:200px;
+    }
+    .gauge > .title{
+        font-size: 20px;
+        color:black
+    }
+
+    #gAQIValue,#gTempValue,#gHumValue{
+        position: relative;
+        bottom: 20%;
+        font-size:25px;
+        color: black;
+        font-weight: bold;
     }
 }
 
-@media only screen and (max-width: 1544px) and (min-width: 767px) {
-    div.ui.card > div.content.title{
-        display: none;
+@media only screen and (min-width: 1544px){
+    .hidedesktop{
+        display: none !important;
     }
 }

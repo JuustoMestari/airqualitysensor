@@ -1,14 +1,3 @@
-/*if(typeof(EventSource) !== 'undefined') {
-    const sourceSensors = new EventSource('http://' + window.location.hostname + '/sensors');
-    sourceSensors.onmessage = function(e) {
-        sensorData = JSON.parse(e.data);
-        console.log(sensorData);
-        document.getElementById("device").innerHTML = sensorData.device;
-        document.getElementById("aqi").innerHTML = sensorData.aqi;
-    };
-} else {
-    document.getElementById("resultTime").innerHTML = "Sorry, your browser does not support server-sent events...";
-}*/
 let selectedTimeValue="1";
 let chart = {};
 document.addEventListener("DOMContentLoaded", function(event) { 
@@ -20,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
             setupStats(data);
         }
     });
+    //test
+    //setupStats({});
     //retrieve json
     setupChart();
     getChartData(selectedTimeValue);
@@ -36,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 var setupStats = function(stats){
     //test data
-    //stats = {"signalstrength": -55, "network": ["192.168.39.85", "255.255.255.0", "192.168.39.1", "192.168.10.50"], "mac": "24:0a:c4:c6:7d:30", "device": "240ac4c67d30", "freespace": 1560576, "totalspace": 2097152, "version": "1.12.0", "time": 1590211817, "essid": "NeonHA"};
+    stats = {"signalstrength": -55, "network": ["192.168.39.85", "255.255.255.0", "192.168.39.1", "192.168.10.50"], "mac": "24:0a:c4:c6:7d:30", "device": "240ac4c67d30", "freespace": 1560576, "totalspace": 2097152, "version": "1.12.0", "time": 1590211817, "essid": "NeonHA"};
     
     //Setup device name and version
     document.getElementById("deviceSerial").innerHTML = `${stats.device}`
@@ -96,6 +87,7 @@ var getChartData = function(timeSelector){
             console.error('Something went wrong: ' + err);
         } else {
             updateChart(data);
+            updateGauges(data);
         }
     });
 }
@@ -137,6 +129,91 @@ var updateChart = function(dataset){
     chart.update();
 }
 
+var updateGauges = function(dataset){
+    //https://bernii.github.io/gauge.js/
+    //Air Quality Index Gauge
+    var optsAQI = {
+        angle: -0.2, // The span of the gauge arc
+        lineWidth: 0.2, // The line thickness
+        radiusScale: 1, // Relative radius
+        pointer: {
+            length: 0.6, // // Relative to gauge radius
+            strokeWidth: 0.035, // The thickness
+            color: '#000000' // Fill color
+        },
+        limitMax: false,     // If false, max value increases automatically if value > maxValue
+        limitMin: false,     // If true, the min value of the gauge will be fixed
+        strokeColor: '#E0E0E0',  // to see which ones work best for you
+        staticZones: [
+            {strokeStyle: "#92d050", min: 0, max: 50}, 
+            {strokeStyle: "#ff0", min: 51, max: 100}, 
+            {strokeStyle: "#ffc000", min: 101, max: 150}, 
+            {strokeStyle: "#f00", min: 151, max: 200},
+            {strokeStyle: "#7030a0", min: 201, max: 300},
+            {strokeStyle: "#852737", min: 301, max: 500}
+         ],
+         staticLabels: {
+            font: "10px sans-serif",  // Specifies font
+            labels: [0,50,100,150,200,300,500],  // Print labels at these values
+            color: "#000000",  // Optional: Label text color
+            fractionDigits: 0  // Optional: Numerical precision. 0=round off.
+          },
+    };
+    var canvasAQI = document.getElementById('gaugeAQI');
+    var currentAQI=Math.ceil(dataset[dataset.length-1].metrics.aqi);
+    var gaugeAQI = new Gauge(canvasAQI).setOptions(optsAQI); // create sexy gauge!
+    gaugeAQI.maxValue = 500; // set max gauge value
+    gaugeAQI.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+    gaugeAQI.animationSpeed = 1; // set animation speed (32 is default value)
+    gaugeAQI.set(currentAQI); // set actual value
+    document.getElementById('gAQIValue').innerHTML=currentAQI;
+    
+    //Temperature Gauge
+    var optsTemp = {
+        angle: -0.2, // The span of the gauge arc
+        lineWidth: 0.2, // The line thickness
+        radiusScale: 1, // Relative radius
+        colorStart: 'blue',   // Colors
+        colorStop: 'red',
+        generateGradient: true,
+        pointer: {
+            length: 0.6, // // Relative to gauge radius
+            strokeWidth: 0.035, // The thickness
+            color: '#000000' // Fill color
+        },
+        strokeColor: '#E0E0E0',  // to see which ones work best for you
+    };
+    var canvasTemp = document.getElementById('gaugeTemp');
+    var currentTemp=Math.round(dataset[dataset.length-1].metrics.temperature*10)/10;
+    var gaugeTemp = new Gauge(canvasTemp).setOptions(optsTemp); // create sexy gauge!
+    gaugeTemp.maxValue = 50; // set max gauge value
+    gaugeTemp.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+    gaugeTemp.animationSpeed = 1; // set animation speed (32 is default value)
+    gaugeTemp.set(currentTemp); // set actual value
+    document.getElementById('gTempValue').innerHTML=currentTemp+"C";
+    
+    //Humidity Gauge
+    var optsHum = {
+        angle: -0.2, // The span of the gauge arc
+        lineWidth: 0.2, // The line thickness
+        radiusScale: 1, // Relative radius
+        pointer: {
+            length: 0.6, // // Relative to gauge radius
+            strokeWidth: 0.035, // The thickness
+            color: '#000000' // Fill color
+        },
+        strokeColor: '#E0E0E0',  // to see which ones work best for you
+    };
+    var canvasHum = document.getElementById('gaugeHum');
+    var currentHum=Math.ceil(dataset[dataset.length-1].metrics.humidity);
+    var gaugeHum = new Gauge(canvasHum).setOptions(optsHum); // create sexy gauge!
+    gaugeHum.maxValue = 100; // set max gauge value
+    gaugeHum.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+    gaugeHum.animationSpeed = 1; // set animation speed (32 is default value)
+    gaugeHum.set(currentHum); // set actual value
+    document.getElementById('gHumValue').innerHTML=currentHum+" %";
+
+}
 
 //tools
 var getJSON = function(url, callback) {

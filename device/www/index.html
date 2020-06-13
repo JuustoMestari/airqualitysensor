@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/moment.min.js"></script>
     <script src="js/chart.min.js"></script>
+    <script src="js/gauge.min.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body>
@@ -27,17 +28,17 @@
                                     </h1>
                                 </div>
                                
-                                <div class="two wide column">
+                                <div class="two wide column hidemobile">
                                     <h2 class="ui header"><span id="networkIP">192.168.000.000</span>
                                         <div class="sub header" id="networkMAC">00:00:00:00:00:00</div>
                                     </h2>
                                 </div>
-                                <div class="two wide column">
+                                <div class="two wide column hidemobile">
                                     <h2 class="ui header"><span id="networkAP">AccessPoint</span>
                                         <div class="sub header" id="networkRSSI">rssi: 9999</div>
                                     </h2>
                                 </div>
-                                <div class="two wide column">
+                                <div class="two wide column hidemobile">
                                     <h2 class="ui header">
                                         <div class="ui progress tiny" id="storagebar" >
                                             <div class="bar" style="width:50%;">
@@ -48,10 +49,10 @@
                                     </h2>
                                     
                                 </div>
-                                <div class="three wide column">
+                                <div class="three wide column hidemobile">
                                      
                                 </div>
-                                <div class="two wide right floated column">
+                                <div class="two wide right floated column hidemobile">
                                     <h2 class="ui header"><span id="deviceTime">24.05.20 15:00</span>
                                         <div class="sub header">device time</div>
                                     </h2>
@@ -60,9 +61,24 @@
                         </div>
                     </div>
                     <div class="content extra chart">
-                        <canvas id="sensorChart"></canvas>
+                        <canvas id="sensorChart" class="hidemobile"></canvas>
+                        <div class="gauge hidedesktop" >
+                            <div class="title">AQI</div>
+                            <canvas id="gaugeAQI" ></canvas>
+                            <div id="gAQIValue"></div>
+                        </div>
+                        <div class="gauge hidedesktop">
+                            <div class="title">Temperature</div>
+                            <canvas id="gaugeTemp" ></canvas>
+                            <div id="gTempValue"></div>
+                        </div>
+                        <div class="gauge hidedesktop">
+                            <div class="title">Humidity</div>
+                            <canvas id="gaugeHum" ></canvas>
+                            <div id="gHumValue"></div>
+                        </div>
                     </div>
-                    <div class="content extra settings">
+                    <div class="content extra settings hidemobile">
                         <label for="timeSelector">Time period:</label>
                         <select id="timeSelector">
                             <option value="1" default>1 min</option>
