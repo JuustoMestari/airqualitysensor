@@ -58,17 +58,22 @@ div.ui.grid.device > div.row > .column{
     }
     .gauge{
         text-align: center;
-        height:200px;
+        height:400px;
+        margin-bottom:70px;
+    }
+    .gauge > canvas {
+        height:400px;
     }
     .gauge > .title{
-        font-size: 20px;
-        color:black
+        font-size: 35px;
+        color:black;
+        
     }
 
     #gAQIValue,#gTempValue,#gHumValue{
         position: relative;
         bottom: 20%;
-        font-size:25px;
+        font-size:40px;
         color: black;
         font-weight: bold;
     }
