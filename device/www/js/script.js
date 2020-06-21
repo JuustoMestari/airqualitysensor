@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 var setupStats = function(stats){
     //test data
-    stats = {"signalstrength": -55, "network": ["192.168.39.85", "255.255.255.0", "192.168.39.1", "192.168.10.50"], "mac": "24:0a:c4:c6:7d:30", "device": "240ac4c67d30", "freespace": 1560576, "totalspace": 2097152, "version": "1.12.0", "time": 1590211817, "essid": "NeonHA"};
+    //stats = {"signalstrength": -55, "network": ["192.168.39.85", "255.255.255.0", "192.168.39.1", "192.168.10.50"], "mac": "24:0a:c4:c6:7d:30", "device": "240ac4c67d30", "freespace": 1560576, "totalspace": 2097152, "version": "1.12.0", "time": 1590211817, "essid": "NeonHA"};
     
     //Setup device name and version
     document.getElementById("deviceSerial").innerHTML = `${stats.device}`
@@ -153,7 +153,7 @@ var updateGauges = function(dataset){
             {strokeStyle: "#852737", min: 301, max: 500}
          ],
          staticLabels: {
-            font: "10px sans-serif",  // Specifies font
+            font: "15px sans-serif",  // Specifies font
             labels: [0,50,100,150,200,300,500],  // Print labels at these values
             color: "#000000",  // Optional: Label text color
             fractionDigits: 0  // Optional: Numerical precision. 0=round off.
